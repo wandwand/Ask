@@ -1,7 +1,6 @@
-using SistemaDelivery.Interfaces;
-using SistemaDelivery.Models;
+using SistemaDelivery.Cardapios;
 
-namespace SistemaDelivery.Services;
+namespace SistemaDelivery.Pedidos;
 
 // [REQUISITO: Dependência - Recebe Pedido como parâmetro apenas durante a execução de ImprimirRecibo]
 public class GeradorRecibo

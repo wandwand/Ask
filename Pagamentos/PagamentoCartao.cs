@@ -1,6 +1,4 @@
-using SistemaDelivery.Interfaces;
-
-namespace SistemaDelivery.Models;
+namespace SistemaDelivery.Pagamentos;
 
 // [REQUISITO: Implementação de Interface 2 - Pagamento via Cartão com taxa de maquininha/parcelamento]
 public class PagamentoCartao : IMetodoPagamento

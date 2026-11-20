@@ -1,4 +1,4 @@
-namespace SistemaDelivery.Models;
+namespace SistemaDelivery.Cardapios;
 
 // [REQUISITO: Herança Genuína 2 - Subclasse de ItemCardapio]
 public class Bebida : ItemCardapio

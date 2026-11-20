@@ -1,4 +1,4 @@
-namespace SistemaDelivery.Models;
+namespace SistemaDelivery.Entregas;
 
 // [REQUISITO: Associação Simples (Parte 2) - Entidade Entregador referenciada por Pedido]
 public class Entregador

@@ -1,6 +1,4 @@
-using SistemaDelivery.Interfaces;
-
-namespace SistemaDelivery.Models;
+namespace SistemaDelivery.Cardapios;
 
 // [REQUISITO: Herança Genuína 3 - Subclasse de ItemCardapio que também implementa IPreparavel]
 public class Sobremesa : ItemCardapio, IPreparavel

@@ -9,23 +9,26 @@ Projeto de console em **C# (.NET 10)** desenvolvido para demonstrar os pilares d
 ```text
 SistemaDelivery.csproj
 Program.cs                         (namespace SistemaDelivery)
-├── Interfaces/
-│   ├── IMetodoPagamento.cs        (namespace SistemaDelivery.Interfaces)
-│   └── IPreparavel.cs             (namespace SistemaDelivery.Interfaces)
-├── Models/
-│   ├── Bebida.cs                  (namespace SistemaDelivery.Models)
-│   ├── Cardapio.cs                (namespace SistemaDelivery.Models)
-│   ├── Cliente.cs                 (namespace SistemaDelivery.Models)
-│   ├── Entregador.cs              (namespace SistemaDelivery.Models)
-│   ├── ItemCardapio.cs            (namespace SistemaDelivery.Models)
-│   ├── ItemPedido.cs              (namespace SistemaDelivery.Models)
-│   ├── Lanche.cs                  (namespace SistemaDelivery.Models)
-│   ├── PagamentoCartao.cs         (namespace SistemaDelivery.Models)
-│   ├── PagamentoPix.cs            (namespace SistemaDelivery.Models)
-│   ├── Pedido.cs                  (namespace SistemaDelivery.Models)
-│   └── Sobremesa.cs               (namespace SistemaDelivery.Models)
+├── Cardapios/
+│   ├── Bebida.cs                  (namespace SistemaDelivery.Cardapios)
+│   ├── Cardapio.cs                (namespace SistemaDelivery.Cardapios)
+│   ├── IPreparavel.cs             (namespace SistemaDelivery.Cardapios)
+│   ├── ItemCardapio.cs            (namespace SistemaDelivery.Cardapios)
+│   ├── Lanche.cs                  (namespace SistemaDelivery.Cardapios)
+│   └── Sobremesa.cs               (namespace SistemaDelivery.Cardapios)
+├── Clientes/
+│   └── Cliente.cs                 (namespace SistemaDelivery.Clientes)
+├── Entregas/
+│   └── Entregador.cs              (namespace SistemaDelivery.Entregas)
+├── Pagamentos/
+│   ├── IMetodoPagamento.cs        (namespace SistemaDelivery.Pagamentos)
+│   ├── PagamentoCartao.cs         (namespace SistemaDelivery.Pagamentos)
+│   └── PagamentoPix.cs            (namespace SistemaDelivery.Pagamentos)
+├── Pedidos/
+│   ├── GeradorRecibo.cs           (namespace SistemaDelivery.Pedidos)
+│   ├── ItemPedido.cs              (namespace SistemaDelivery.Pedidos)
+│   └── Pedido.cs                  (namespace SistemaDelivery.Pedidos)
 └── Services/
-    ├── GeradorRecibo.cs           (namespace SistemaDelivery.Services)
     └── RestauranteService.cs      (namespace SistemaDelivery.Services)
 ```
 
@@ -50,12 +53,12 @@ dotnet run
 ## Resumo para Diagrama de Classes UML
 
 ### 1. Interfaces e Classes Abstratas
-- **`<<interface>> IMetodoPagamento`** (`SistemaDelivery.Interfaces`)
+- **`<<interface>> IMetodoPagamento`** (`SistemaDelivery.Pagamentos`)
   - `+ ProcessarPagamento(valor: double): double`
   - `+ GetNomeMetodo(): string`
-- **`<<interface>> IPreparavel`** (`SistemaDelivery.Interfaces`)
+- **`<<interface>> IPreparavel`** (`SistemaDelivery.Cardapios`)
   - `+ GerarInstrucoesCozinha(): string`
-- **`<<abstract>> ItemCardapio`** (`SistemaDelivery.Models`)
+- **`<<abstract>> ItemCardapio`** (`SistemaDelivery.Cardapios`)
   - `# codigo: string`
   - `# nome: string`
   - `# precoBase: double`
@@ -84,14 +87,14 @@ dotnet run
   - `- parcelas: int`
 
 ### 3. Entidades e Regras de Negócio
-- **`Cliente`** (`SistemaDelivery.Models`)
+- **`Cliente`** (`SistemaDelivery.Clientes`)
   - `- id: int`, `- nome: string`, `- endereco: string`, `- telefone: string`
-- **`Entregador`** (`SistemaDelivery.Models`)
+- **`Entregador`** (`SistemaDelivery.Entregas`)
   - `- id: int`, `- nome: string`, `- placaMoto: string`, `- disponivel: bool`
-- **`ItemPedido`** (`SistemaDelivery.Models`)
+- **`ItemPedido`** (`SistemaDelivery.Pedidos`)
   - `- item: ItemCardapio`, `- quantidade: int`, `- observacao: string`
   - Construtor `internal`: instanciado exclusivamente por `Pedido` dentro do assembly.
-- **`Pedido`** (`SistemaDelivery.Models`)
+- **`Pedido`** (`SistemaDelivery.Pedidos`)
   - `+ TaxaEntregaBase: double` *(static)*
   - `- totalPedidosRealizados: int` *(static)*
   - `- faturamentoTotal: double` *(static)*
@@ -101,9 +104,9 @@ dotnet run
   - `+ AdicionarItem(item: ItemCardapio, quantidade: int, observacao: string): void`
   - `+ AtribuirEntregador(entregador: Entregador, distanciaKm: double): void`
   - `+ FinalizarPedido(pagamento: IMetodoPagamento): double`
-- **`Cardapio`** (`SistemaDelivery.Models`)
+- **`Cardapio`** (`SistemaDelivery.Cardapios`)
   - `- nomeRestaurante: string`, `- itens: List<ItemCardapio>`
-- **`GeradorRecibo`** (`SistemaDelivery.Services`)
+- **`GeradorRecibo`** (`SistemaDelivery.Pedidos`)
   - `+ ImprimirRecibo(pedido: Pedido): void`
 - **`RestauranteService`** (`SistemaDelivery.Services`)
   - Gerencia `Cardapio`, `Cliente`s, `Entregador`es e `Pedido`s pré-cadastrados.

@@ -1,4 +1,4 @@
-namespace SistemaDelivery.Models;
+namespace SistemaDelivery.Clientes;
 
 // [REQUISITO: Associação Simples (Parte 1) - Entidade Cliente referenciada por Pedido]
 public class Cliente

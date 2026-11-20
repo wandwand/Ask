@@ -1,6 +1,4 @@
-using SistemaDelivery.Interfaces;
-
-namespace SistemaDelivery.Models;
+namespace SistemaDelivery.Pagamentos;
 
 // [REQUISITO: Implementação de Interface 1 - Pagamento via Pix com 5% de desconto]
 public class PagamentoPix : IMetodoPagamento

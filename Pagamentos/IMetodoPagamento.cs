@@ -1,4 +1,4 @@
-namespace SistemaDelivery.Interfaces;
+namespace SistemaDelivery.Pagamentos;
 
 // [REQUISITO: Interface 1 - Contrato para polimorfismo de formas de pagamento]
 public interface IMetodoPagamento

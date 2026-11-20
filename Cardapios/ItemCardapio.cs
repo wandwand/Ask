@@ -1,4 +1,4 @@
-namespace SistemaDelivery.Models;
+namespace SistemaDelivery.Cardapios;
 
 // [REQUISITO: Classe Abstrata - Base para os produtos do cardápio]
 public abstract class ItemCardapio

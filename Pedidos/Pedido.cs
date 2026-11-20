@@ -1,6 +1,9 @@
-using SistemaDelivery.Interfaces;
+using SistemaDelivery.Cardapios;
+using SistemaDelivery.Clientes;
+using SistemaDelivery.Entregas;
+using SistemaDelivery.Pagamentos;
 
-namespace SistemaDelivery.Models;
+namespace SistemaDelivery.Pedidos;
 
 public class Pedido
 {

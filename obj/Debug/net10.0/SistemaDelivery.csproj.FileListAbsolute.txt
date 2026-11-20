@@ -12,3 +12,4 @@ C:\git\Ask\obj\Debug\net10.0\refint\SistemaDelivery.dll
 C:\git\Ask\obj\Debug\net10.0\SistemaDelivery.pdb
 C:\git\Ask\obj\Debug\net10.0\SistemaDelivery.genruntimeconfig.cache
 C:\git\Ask\obj\Debug\net10.0\ref\SistemaDelivery.dll
+C:\git\Ask\obj\Debug\net10.0\SistemaDelivery.sourcelink.json

@@ -1,4 +1,6 @@
-namespace SistemaDelivery.Models;
+using SistemaDelivery.Cardapios;
+
+namespace SistemaDelivery.Pedidos;
 
 // [REQUISITO: Composição (Parte) - ItemPedido só faz sentido dentro de um Pedido]
 public class ItemPedido

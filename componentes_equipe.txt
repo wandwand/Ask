@@ -11,8 +11,8 @@ Implementações :
 
 --------------------------------------------------------------------------------
 
-Nome completo : Marcos Venicius De Oliveira Pinto
-Matrícula     : 500013
+Aluno     : Marcos Venicius De Oliveira Pinto
+Matrícula : 500013
 Papel na equipe: Regras de Pedido, Pagamentos , Estáticos, Diagrama UML e Documentação.
 Implementações :
   - Pedidos/Pedido.cs e Pedidos/ItemPedido.cs (composição, associações e static)

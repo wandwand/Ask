@@ -1,0 +1,23 @@
+
+Aluno     : Ian Wanderley Gomes
+Matrícula : 514321
+Papel na equipe: Arquitetura, Modelagem de Domínio, Cardápio, Serviços e Interface Console
+Implementações :
+  - Cardapios/ItemCardapio.cs (classe abstrata, atributos protected, polimorfismo)
+  - Cardapios/Lanche.cs, Bebida.cs, Sobremesa.cs (heranças genuínas)
+  - Cardapios/IPreparavel.cs e Cardapios/Cardapio.cs (interface e agregação)
+  - Services/RestauranteService.cs e Pedidos/GeradorRecibo.cs (dependência)
+  - Program.cs (menu interativo e chamadas polimórficas)
+
+--------------------------------------------------------------------------------
+
+Nome completo : Marcos Venicius De Oliveira Pinto
+Matrícula     : 500013
+Papel na equipe: Regras de Pedido, Pagamentos , Estáticos, Diagrama UML e Documentação.
+Implementações :
+  - Pedidos/Pedido.cs e Pedidos/ItemPedido.cs (composição, associações e static)
+  - Pagamentos/IMetodoPagamento.cs, PagamentoPix.cs, PagamentoCartao.cs
+  - Clientes/Cliente.cs e Entregas/Entregador.cs
+  - Diagrama_Classes_UML.md, Manual_Execucao.md e README.md
+
+

@@ -36,6 +36,7 @@ Program.cs                         (namespace SistemaDelivery)
 
 ## Como Compilar e Executar via Terminal
 
+### Opção 1
 A partir da raiz do projeto (`C:\git\Ask`):
 
 ### 1. Compilar
@@ -47,7 +48,16 @@ dotnet build
 ```powershell
 dotnet run
 ```
+### Opção 2
+### 1. Compilar
+```powershell
+Instalar Visual Studio(Microsoft)
+```
 
+### 2. Executar
+```powershell
+Executar SistemaDelivery.csproj
+```
 ---
 
 ## Resumo para Diagrama de Classes UML

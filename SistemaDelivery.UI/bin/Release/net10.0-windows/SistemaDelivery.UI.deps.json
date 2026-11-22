@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "SistemaDelivery.UI/1.0.0": {
+        "dependencies": {
+          "SistemaDelivery": "1.0.0"
+        },
+        "runtime": {
+          "SistemaDelivery.UI.dll": {}
+        }
+      },
+      "SistemaDelivery/1.0.0": {
+        "runtime": {
+          "SistemaDelivery.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SistemaDelivery.UI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SistemaDelivery/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

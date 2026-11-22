@@ -1,0 +1,15 @@
+C:\git\Ask\bin\Release\net10.0\SistemaDelivery.exe
+C:\git\Ask\bin\Release\net10.0\SistemaDelivery.deps.json
+C:\git\Ask\bin\Release\net10.0\SistemaDelivery.runtimeconfig.json
+C:\git\Ask\bin\Release\net10.0\SistemaDelivery.dll
+C:\git\Ask\bin\Release\net10.0\SistemaDelivery.pdb
+C:\git\Ask\obj\Release\net10.0\SistemaDelivery.GeneratedMSBuildEditorConfig.editorconfig
+C:\git\Ask\obj\Release\net10.0\SistemaDelivery.AssemblyInfoInputs.cache
+C:\git\Ask\obj\Release\net10.0\SistemaDelivery.AssemblyInfo.cs
+C:\git\Ask\obj\Release\net10.0\SistemaDelivery.csproj.CoreCompileInputs.cache
+C:\git\Ask\obj\Release\net10.0\SistemaDelivery.sourcelink.json
+C:\git\Ask\obj\Release\net10.0\SistemaDelivery.dll
+C:\git\Ask\obj\Release\net10.0\refint\SistemaDelivery.dll
+C:\git\Ask\obj\Release\net10.0\SistemaDelivery.pdb
+C:\git\Ask\obj\Release\net10.0\SistemaDelivery.genruntimeconfig.cache
+C:\git\Ask\obj\Release\net10.0\ref\SistemaDelivery.dll

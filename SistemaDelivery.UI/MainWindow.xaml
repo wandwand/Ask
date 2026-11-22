@@ -1,0 +1,292 @@
+<Window x:Class="SistemaDelivery.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sistema de Pedidos &amp; Delivery" Height="740" Width="1100"
+        MinHeight="620" MinWidth="920"
+        Icon="app.ico"
+        WindowStartupLocation="CenterScreen"
+        Background="#F3F4F6">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Cabeçalho -->
+        <Border Grid.Row="0" Background="#1E293B" CornerRadius="8" Padding="16,12" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock x:Name="TxtNomeRestaurante" Text="Sabor &amp; Código Delivery"
+                               Foreground="White" FontSize="20" FontWeight="Bold"/>
+                    <TextBlock x:Name="TxtPedidoAtualStatus" Text="Nenhum pedido aberto no momento"
+                               Foreground="#93C5FD" FontSize="13" Margin="0,4,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <TextBlock x:Name="TxtResumoEstatisticas" Text="Pedidos: 0 | Faturamento: R$ 0,00"
+                               Foreground="#E2E8F0" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="TxtTaxaBase" Text="Taxa Base: R$ 5,00"
+                               Foreground="#94A3B8" FontSize="12" HorizontalAlignment="Right" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Abas Principais -->
+        <TabControl x:Name="MainTabs" Grid.Row="1" Background="White" BorderBrush="#CBD5E1">
+            <!-- ABA 1: CARDÁPIO -->
+            <TabItem Header="1. Cardápio (Polimorfismo)" Padding="12,6" FontSize="13">
+                <Grid Margin="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Itens do Cardápio (cálculo polimórfico de preço final, tempo de preparo e instruções de cozinha)"
+                               Foreground="#475569" FontSize="13" Margin="0,0,0,8"/>
+
+                    <DataGrid x:Name="GridCardapio" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+                              SelectionMode="Single" CanUserAddRows="False" GridLinesVisibility="Horizontal"
+                              HeadersVisibility="Column" RowHeight="32" FontSize="13">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="70"/>
+                            <DataGridTextColumn Header="Categoria" Binding="{Binding Categoria}" Width="95"/>
+                            <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" Width="180"/>
+                            <DataGridTextColumn Header="Preço Base" Binding="{Binding PrecoBaseFormatado}" Width="95"/>
+                            <DataGridTextColumn Header="Preço Final" Binding="{Binding PrecoFinalFormatado}" Width="95"/>
+                            <DataGridTextColumn Header="Preparo" Binding="{Binding TempoPreparoFormatado}" Width="80"/>
+                            <DataGridTextColumn Header="Detalhes" Binding="{Binding Detalhes}" Width="220"/>
+                            <DataGridTextColumn Header="Cozinha / Balcão" Binding="{Binding InstrucoesCozinha}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                        <Button Content="Ir para Pedido Atual / Adicionar Item selecionado"
+                                Click="BtnIrParaPedidoComItem_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- ABA 2: PEDIDO ATUAL & PAGAMENTO -->
+            <TabItem Header="2. Pedido Atual &amp; Pagamento" Padding="12,6" FontSize="13">
+                <Grid Margin="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.25*"/>
+                        <ColumnDefinition Width="14"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Coluna Esquerda: Cliente, Adição de Itens e Lista -->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Cliente / Novo Pedido -->
+                        <GroupBox Header="Cliente e Abertura do Pedido" Padding="10" Margin="0,0,0,10" FontWeight="SemiBold">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="CmbClientes" Grid.Column="0" Height="30" VerticalContentAlignment="Center"
+                                          FontWeight="Normal" Margin="0,0,10,0"/>
+                                <Button Grid.Column="1" Content="Criar Novo Pedido" Click="BtnCriarPedido_Click"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <!-- Adicionar Item -->
+                        <GroupBox Grid.Row="1" Header="Adicionar Item ao Pedido" Padding="10" Margin="0,0,0,10" FontWeight="SemiBold">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox x:Name="CmbItensCardapio" Grid.Row="0" Grid.Column="0" Height="30"
+                                          VerticalContentAlignment="Center" FontWeight="Normal" Margin="0,0,8,8"/>
+                                <TextBox x:Name="TxtQuantidade" Grid.Row="0" Grid.Column="1" Text="1" Height="30"
+                                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                         FontWeight="Normal" Margin="0,0,8,8" ToolTip="Quantidade"/>
+                                <Button Grid.Row="0" Grid.Column="2" Content="Adicionar" Click="BtnAdicionarItem_Click"
+                                        Margin="0,0,0,8"/>
+
+                                <TextBox x:Name="TxtObservacao" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                                         Height="28" VerticalContentAlignment="Center" FontWeight="Normal"
+                                         ToolTip="Observação (ex: sem cebola, gelo e limão)"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Observação opcional (ex: sem cebola)"
+                                           Foreground="#94A3B8" FontWeight="Normal" IsHitTestVisible="False"
+                                           VerticalAlignment="Center" Margin="6,0,0,0"
+                                           x:Name="LblObsPlaceholder"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <!-- Itens do Pedido -->
+                        <GroupBox Grid.Row="2" Header="Itens no Pedido Atual" Padding="8" FontWeight="SemiBold">
+                            <DataGrid x:Name="GridItensPedido" AutoGenerateColumns="False" IsReadOnly="True"
+                                      CanUserAddRows="False" FontWeight="Normal" RowHeight="28" HeadersVisibility="Column">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Qtd" Binding="{Binding Quantidade}" Width="50"/>
+                                    <DataGridTextColumn Header="Item" Binding="{Binding NomeItem}" Width="*"/>
+                                    <DataGridTextColumn Header="Unit." Binding="{Binding PrecoUnitarioFormatado}" Width="85"/>
+                                    <DataGridTextColumn Header="Subtotal" Binding="{Binding SubtotalFormatado}" Width="90"/>
+                                    <DataGridTextColumn Header="Observação" Binding="{Binding Observacao}" Width="140"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
+                    </Grid>
+
+                    <!-- Coluna Direita: Entregador, Resumo e Pagamento -->
+                    <StackPanel Grid.Column="2">
+                        <!-- Entregador e Frete -->
+                        <GroupBox Header="Entrega e Cálculo de Frete (Estático)" Padding="10" Margin="0,0,0,10" FontWeight="SemiBold">
+                            <StackPanel TextElement.FontWeight="Normal">
+                                <TextBlock Text="Entregador:" Margin="0,0,0,4"/>
+                                <ComboBox x:Name="CmbEntregadores" Height="30" VerticalContentAlignment="Center" Margin="0,0,0,8"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="90"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Distância (km):" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                    <TextBox x:Name="TxtDistanciaKm" Grid.Column="1" Text="3.5" Height="30"
+                                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,8,0"/>
+                                    <Button Grid.Column="2" Content="Atribuir Entregador" Click="BtnAtribuirEntregador_Click"/>
+                                </Grid>
+                                <TextBlock x:Name="TxtEntregadorAtribuido" Text="Entregador: Não atribuído (Retirada/Base)"
+                                           Foreground="#475569" Margin="0,8,0,0" FontSize="12"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- Resumo Financeiro -->
+                        <GroupBox Header="Resumo do Pedido" Padding="10" Margin="0,0,0,10" FontWeight="SemiBold">
+                            <Grid TextElement.FontWeight="Normal">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Subtotal dos Itens:" Margin="0,2"/>
+                                <TextBlock x:Name="TxtSubtotalItens" Grid.Row="0" Grid.Column="1" Text="R$ 0,00" FontWeight="SemiBold" Margin="0,2"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Taxa de Entrega:" Margin="0,2"/>
+                                <TextBlock x:Name="TxtTaxaEntrega" Grid.Row="1" Grid.Column="1" Text="R$ 0,00" FontWeight="SemiBold" Margin="0,2"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Tempo Estimado de Preparo:" Margin="0,2"/>
+                                <TextBlock x:Name="TxtTempoPreparo" Grid.Row="2" Grid.Column="1" Text="0 min" FontWeight="SemiBold" Margin="0,2"/>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Total Bruto:" FontSize="15" FontWeight="Bold" Margin="0,6,0,0"/>
+                                <TextBlock x:Name="TxtTotalBruto" Grid.Row="3" Grid.Column="1" Text="R$ 0,00" FontSize="15" FontWeight="Bold" Foreground="#1D4ED8" Margin="0,6,0,0"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <!-- Pagamento -->
+                        <GroupBox Header="Pagamento (Polimorfismo IMetodoPagamento)" Padding="10" FontWeight="SemiBold">
+                            <StackPanel TextElement.FontWeight="Normal">
+                                <RadioButton x:Name="RbPix" Content="Pix (5% de desconto)" IsChecked="True"
+                                             Checked="PagamentoMetodo_Changed" Margin="0,0,0,6"/>
+                                <StackPanel x:Name="PanelPix" Margin="20,0,0,10">
+                                    <TextBlock Text="Chave Pix:" FontSize="12" Foreground="#475569"/>
+                                    <TextBox x:Name="TxtChavePix" Text="restaurante@pix.com.br" Height="28" VerticalContentAlignment="Center"/>
+                                </StackPanel>
+
+                                <RadioButton x:Name="RbCartao" Content="Cartão de Crédito (taxa maquininha/parcelamento)"
+                                             Checked="PagamentoMetodo_Changed" Margin="0,0,0,6"/>
+                                <StackPanel x:Name="PanelCartao" Margin="20,0,0,12" Visibility="Collapsed">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="90"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="4 últimos dígitos:" FontSize="12" Foreground="#475569"/>
+                                            <TextBox x:Name="TxtDigitosCartao" Text="1234" MaxLength="4" Height="28" VerticalContentAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2">
+                                            <TextBlock Text="Parcelas:" FontSize="12" Foreground="#475569"/>
+                                            <ComboBox x:Name="CmbParcelas" Height="28" SelectedIndex="0">
+                                                <ComboBoxItem Content="1x"/>
+                                                <ComboBoxItem Content="2x"/>
+                                                <ComboBoxItem Content="3x"/>
+                                                <ComboBoxItem Content="4x"/>
+                                                <ComboBoxItem Content="5x"/>
+                                                <ComboBoxItem Content="6x"/>
+                                            </ComboBox>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+
+                                <Button Content="Finalizar Pedido e Gerar Recibo" Background="#16A34A"
+                                        Height="36" FontSize="14" Click="BtnFinalizarPedido_Click"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- ABA 3: RECIBOS & ESTATÍSTICAS -->
+            <TabItem Header="3. Recibos &amp; Estatísticas" Padding="12,6" FontSize="13">
+                <Grid Margin="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280"/>
+                        <ColumnDefinition Width="14"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Histórico e Estatísticas -->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <GroupBox Header="Estatísticas Globais (Estático)" Padding="10" Margin="0,0,0,10" FontWeight="SemiBold">
+                            <StackPanel TextElement.FontWeight="Normal">
+                                <TextBlock x:Name="TxtStatTaxaBase" Text="Taxa Entrega Base: R$ 5,00" Margin="0,2"/>
+                                <TextBlock x:Name="TxtStatTotalPedidos" Text="Pedidos Realizados: 0" Margin="0,2"/>
+                                <TextBlock x:Name="TxtStatFaturamento" Text="Faturamento Total: R$ 0,00" Margin="0,2" FontWeight="Bold" Foreground="#15803D"/>
+                                <TextBlock x:Name="TxtStatFrete5Km" Text="Simulação Frete 5 km: R$ 12,50" Margin="0,2" Foreground="#475569"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <GroupBox Grid.Row="1" Header="Histórico de Pedidos" Padding="8" FontWeight="SemiBold">
+                            <ListBox x:Name="LstHistoricoPedidos" FontWeight="Normal" SelectionChanged="LstHistoricoPedidos_SelectionChanged"/>
+                        </GroupBox>
+                    </Grid>
+
+                    <!-- Cupom Fiscal / Recibo -->
+                    <GroupBox Grid.Column="2" Header="Cupom Fiscal e Comanda da Cozinha" Padding="8" FontWeight="SemiBold">
+                        <TextBox x:Name="TxtRecibo" IsReadOnly="True" FontFamily="Consolas" FontSize="13"
+                                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                                 Background="#0F172A" Foreground="#E2E8F0" Padding="12" FontWeight="Normal"
+                                 Text="Finalize um pedido para visualizar o recibo completo aqui."/>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <!-- Barra de Status -->
+        <Border Grid.Row="2" Background="#E2E8F0" CornerRadius="4" Padding="10,6" Margin="0,10,0,0">
+            <TextBlock x:Name="TxtStatusBar" Text="Pronto." Foreground="#334155" FontSize="12"/>
+        </Border>
+    </Grid>
+</Window>

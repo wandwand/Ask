@@ -1,3 +1,4 @@
+using System.Text;
 using SistemaDelivery.Cardapios;
 
 namespace SistemaDelivery.Pedidos;
@@ -13,63 +14,74 @@ public class GeradorRecibo
             return;
         }
 
-        Console.WriteLine("\n==================================================");
-        Console.WriteLine("              CUPOM FISCAL - DELIVERY             ");
-        Console.WriteLine("==================================================");
-        Console.WriteLine($"Pedido Nº: #{pedido.NumeroPedido:D4}");
-        Console.WriteLine($"Cliente  : {pedido.Cliente.Nome}");
-        Console.WriteLine($"Endereço : {pedido.Cliente.Endereco}");
-        Console.WriteLine($"Telefone : {pedido.Cliente.Telefone}");
+        Console.WriteLine(GerarReciboTexto(pedido));
+    }
+
+    public string GerarReciboTexto(Pedido pedido)
+    {
+        if (pedido == null)
+            return "Pedido inválido para geração de recibo.";
+
+        var sb = new StringBuilder();
+        sb.AppendLine();
+        sb.AppendLine("==================================================");
+        sb.AppendLine("              CUPOM FISCAL - DELIVERY             ");
+        sb.AppendLine("==================================================");
+        sb.AppendLine($"Pedido Nº: #{pedido.NumeroPedido:D4}");
+        sb.AppendLine($"Cliente  : {pedido.Cliente.Nome}");
+        sb.AppendLine($"Endereço : {pedido.Cliente.Endereco}");
+        sb.AppendLine($"Telefone : {pedido.Cliente.Telefone}");
 
         if (pedido.Entregador != null)
         {
-            Console.WriteLine($"Entregador: {pedido.Entregador.Nome} (Moto: {pedido.Entregador.PlacaMoto} | Distância: {pedido.DistanciaKm:F1} km)");
+            sb.AppendLine($"Entregador: {pedido.Entregador.Nome} (Moto: {pedido.Entregador.PlacaMoto} | Distância: {pedido.DistanciaKm:F1} km)");
         }
         else
         {
-            Console.WriteLine("Entregador: Retirada no balcão / Não atribuído");
+            sb.AppendLine("Entregador: Retirada no balcão / Não atribuído");
         }
 
-        Console.WriteLine("--------------------------------------------------");
-        Console.WriteLine("ITENS DO PEDIDO:");
+        sb.AppendLine("--------------------------------------------------");
+        sb.AppendLine("ITENS DO PEDIDO:");
         foreach (var itemPedido in pedido.Itens)
         {
             ItemCardapio item = itemPedido.Item;
-            Console.WriteLine($"  {itemPedido.Quantidade}x {item.Nome,-25} R$ {itemPedido.GetSubtotal(),7:F2}");
-            Console.WriteLine($"     Obs: {itemPedido.Observacao}");
+            sb.AppendLine($"  {itemPedido.Quantidade}x {item.Nome,-25} R$ {itemPedido.GetSubtotal(),7:F2}");
+            sb.AppendLine($"     Obs: {itemPedido.Observacao}");
         }
 
-        Console.WriteLine("--------------------------------------------------");
-        Console.WriteLine($"Subtotal dos Itens : R$ {pedido.CalcularSubtotalItens(),8:F2}");
-        Console.WriteLine($"Taxa de Entrega    : R$ {pedido.TaxaEntrega,8:F2}");
-        Console.WriteLine($"Total Bruto        : R$ {pedido.CalcularTotalComFrete(),8:F2}");
-        Console.WriteLine($"Tempo Est. Preparo : {pedido.CalcularTempoTotalPreparo()} minutos");
+        sb.AppendLine("--------------------------------------------------");
+        sb.AppendLine($"Subtotal dos Itens : R$ {pedido.CalcularSubtotalItens(),8:F2}");
+        sb.AppendLine($"Taxa de Entrega    : R$ {pedido.TaxaEntrega,8:F2}");
+        sb.AppendLine($"Total Bruto        : R$ {pedido.CalcularTotalComFrete(),8:F2}");
+        sb.AppendLine($"Tempo Est. Preparo : {pedido.CalcularTempoTotalPreparo()} minutos");
 
         if (pedido.Finalizado)
         {
-            Console.WriteLine($"Forma de Pagamento : {pedido.MetodoPagamentoUtilizado}");
-            Console.WriteLine($"VALOR FINAL PAGO   : R$ {pedido.ValorFinalPago,8:F2}");
+            sb.AppendLine($"Forma de Pagamento : {pedido.MetodoPagamentoUtilizado}");
+            sb.AppendLine($"VALOR FINAL PAGO   : R$ {pedido.ValorFinalPago,8:F2}");
         }
         else
         {
-            Console.WriteLine("Status             : AGUARDANDO PAGAMENTO");
+            sb.AppendLine("Status             : AGUARDANDO PAGAMENTO");
         }
 
-        Console.WriteLine("--------------------------------------------------");
-        Console.WriteLine("COMANDA DA COZINHA:");
+        sb.AppendLine("--------------------------------------------------");
+        sb.AppendLine("COMANDA DA COZINHA:");
         foreach (var itemPedido in pedido.Itens)
         {
             ItemCardapio item = itemPedido.Item;
             // [REQUISITO: Polimorfismo 3 - Chamada via referência da interface IPreparavel]
             if (item is IPreparavel preparavel)
             {
-                Console.WriteLine($"  [{itemPedido.Quantidade}x] {preparavel.GerarInstrucoesCozinha()}");
+                sb.AppendLine($"  [{itemPedido.Quantidade}x] {preparavel.GerarInstrucoesCozinha()}");
             }
             else
             {
-                Console.WriteLine($"  [{itemPedido.Quantidade}x] BALCÃO -> Separar {item.Nome} (não vai para a cozinha).");
+                sb.AppendLine($"  [{itemPedido.Quantidade}x] BALCÃO -> Separar {item.Nome} (não vai para a cozinha).");
             }
         }
-        Console.WriteLine("==================================================\n");
+        sb.AppendLine("==================================================");
+        return sb.ToString();
     }
 }

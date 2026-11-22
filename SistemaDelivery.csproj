@@ -8,4 +8,10 @@
     <RootNamespace>SistemaDelivery</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="SistemaDelivery.UI\**" />
+    <EmbeddedResource Remove="SistemaDelivery.UI\**" />
+    <None Remove="SistemaDelivery.UI\**" />
+  </ItemGroup>
+
 </Project>

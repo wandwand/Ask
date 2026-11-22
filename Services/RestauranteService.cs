@@ -88,6 +88,14 @@ public class RestauranteService
             pedidos.Add(pedido);
     }
 
+    public Cliente AdicionarCliente(string nome, string endereco, string telefone)
+    {
+        int novoId = clientes.Count > 0 ? clientes.Max(c => c.Id) + 1 : 1;
+        var novoCliente = new Cliente(novoId, nome.Trim(), endereco.Trim(), telefone.Trim());
+        clientes.Add(novoCliente);
+        return novoCliente;
+    }
+
     public Cliente? BuscarClientePorId(int id) => clientes.FirstOrDefault(c => c.Id == id);
 
     public Entregador? BuscarEntregadorPorId(int id) => entregadores.FirstOrDefault(e => e.Id == id);

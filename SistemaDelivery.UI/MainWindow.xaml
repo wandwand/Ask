@@ -94,10 +94,12 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <ComboBox x:Name="CmbClientes" Grid.Column="0" Height="30" VerticalContentAlignment="Center"
-                                          FontWeight="Normal" Margin="0,0,10,0"/>
-                                <Button Grid.Column="1" Content="Criar Novo Pedido" Click="BtnCriarPedido_Click"/>
+                                          FontWeight="Normal" Margin="0,0,8,0"/>
+                                <Button Grid.Column="1" Content="Criar Novo Pedido" Click="BtnCriarPedido_Click" Margin="0,0,8,0"/>
+                                <Button Grid.Column="2" Content="Adicionar Novo Cliente" Background="#0F766E" Click="BtnAdicionarCliente_Click"/>
                             </Grid>
                         </GroupBox>
 

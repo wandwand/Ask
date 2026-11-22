@@ -167,6 +167,26 @@ public partial class MainWindow : Window
         TxtStatusBar.Text = $"Pedido #{pedidoAtual.NumeroPedido:D4} criado para {cliente.Nome}.";
     }
 
+    private void BtnAdicionarCliente_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new NovoClienteWindow
+        {
+            Owner = this
+        };
+
+        if (dialog.ShowDialog() == true)
+        {
+            Cliente novoCliente = service.AdicionarCliente(
+                dialog.NomeCliente,
+                dialog.EnderecoCliente,
+                dialog.TelefoneCliente);
+
+            CmbClientes.ItemsSource = service.Clientes.ToList();
+            CmbClientes.SelectedItem = novoCliente;
+            TxtStatusBar.Text = $"Cliente #{novoCliente.Id} - {novoCliente.Nome} cadastrado com sucesso.";
+        }
+    }
+
     private void BtnAdicionarItem_Click(object sender, RoutedEventArgs e)
     {
         if (pedidoAtual == null || pedidoAtual.Finalizado)

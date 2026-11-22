@@ -61,6 +61,14 @@ public class Pedido
         itens.Add(novoItem);
     }
 
+    public bool RemoverItem(ItemPedido itemPedido)
+    {
+        if (finalizado)
+            throw new InvalidOperationException("Não é possível remover itens de um pedido já finalizado.");
+
+        return itens.Remove(itemPedido);
+    }
+
     public void AtribuirEntregador(Entregador entregador, double distanciaKm)
     {
         if (entregador == null)

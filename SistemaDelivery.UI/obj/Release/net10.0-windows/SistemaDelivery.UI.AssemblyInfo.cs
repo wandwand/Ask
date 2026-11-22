@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SistemaDelivery.UI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+04bbf6cb6358c446a068094d47320096dc1665fa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a67aadba553dd015d7f59ccb48ac16de7e99e2d5")]
 [assembly: System.Reflection.AssemblyProductAttribute("SistemaDelivery.UI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SistemaDelivery.UI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

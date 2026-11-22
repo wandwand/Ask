@@ -1,6 +1,8 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using SistemaDelivery.Cardapios;
 using SistemaDelivery.Clientes;
 using SistemaDelivery.Entregas;
@@ -79,6 +81,7 @@ public partial class MainWindow : Window
             TxtPedidoAtualStatus.Text = $"Pedido em andamento: #{pedidoAtual.NumeroPedido:D4} | Cliente: {pedidoAtual.Cliente.Nome} | Itens: {pedidoAtual.Itens.Count}";
             GridItensPedido.ItemsSource = pedidoAtual.Itens.Select(ip => new ItemPedidoRow
             {
+                ItemPedido = ip,
                 Quantidade = ip.Quantidade,
                 NomeItem = ip.Item.Nome,
                 PrecoUnitarioFormatado = $"R$ {ip.Item.CalcularPrecoFinal():F2}",
@@ -304,8 +307,37 @@ public partial class MainWindow : Window
         public override string ToString() => $"[{Item.Codigo}] {Item.Nome} - R$ {Item.CalcularPrecoFinal():F2}";
     }
 
+    private void GridItensPedido_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        DependencyObject? dep = (DependencyObject)e.OriginalSource;
+        while (dep != null && dep is not DataGridRow)
+            dep = VisualTreeHelper.GetParent(dep);
+
+        if (dep is DataGridRow row)
+            row.IsSelected = true;
+    }
+
+    private void BtnRemoverItemPedido_Click(object sender, RoutedEventArgs e)
+    {
+        if (pedidoAtual == null || pedidoAtual.Finalizado)
+            return;
+
+        if (GridItensPedido.SelectedItem is not ItemPedidoRow row)
+        {
+            MessageBox.Show("Selecione um item do pedido para excluir.", "Atenção", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+
+        if (pedidoAtual.RemoverItem(row.ItemPedido))
+        {
+            AtualizarInterface();
+            TxtStatusBar.Text = $"Item \"{row.NomeItem}\" removido do pedido #{pedidoAtual.NumeroPedido:D4}.";
+        }
+    }
+
     private sealed class ItemPedidoRow
     {
+        public required ItemPedido ItemPedido { get; init; }
         public int Quantidade { get; init; }
         public required string NomeItem { get; init; }
         public required string PrecoUnitarioFormatado { get; init; }

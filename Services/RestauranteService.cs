@@ -14,7 +14,7 @@ public class RestauranteService
 
     public RestauranteService()
     {
-        cardapio = new Cardapio("Sabor & Código Delivery");
+        cardapio = new Cardapio("Sistema de Pedidos e Delivery");
         clientes = new List<Cliente>();
         entregadores = new List<Entregador>();
         pedidos = new List<Pedido>();

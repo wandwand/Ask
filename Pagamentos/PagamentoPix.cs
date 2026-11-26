@@ -1,6 +1,6 @@
 namespace SistemaDelivery.Pagamentos;
 
-// [REQUISITO: Implementação de Interface 1 - Pagamento via Pix com 5% de desconto]
+// Implementação de Interface 1 - Pagamento via Pix com 5% de desconto
 public class PagamentoPix : IMetodoPagamento
 {
     private const double DescontoPix = 0.05;

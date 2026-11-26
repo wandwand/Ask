@@ -1,9 +1,9 @@
 namespace SistemaDelivery.Cardapios;
 
-// [REQUISITO: Herança Genuína 1 - Subclasse de ItemCardapio que também implementa IPreparavel]
+// Herança "Genuína" 1 - Subclasse de ItemCardapio que também implementa IPreparavel
 public class Lanche : ItemCardapio, IPreparavel
 {
-    // [REQUISITO: Modificador private - Encapsulamento de atributos específicos]
+    //Modificador private - Encapsulamento de atributos específicos
     private readonly List<string> ingredientes;
     private bool adicionalBordaOuBacon;
     private readonly int tempoBasePreparoMinutos;

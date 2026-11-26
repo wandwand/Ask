@@ -7,7 +7,7 @@ namespace SistemaDelivery.Pedidos;
 
 public class Pedido
 {
-    // [REQUISITO: Atributos Estáticos - Compartilhados por toda a classe Pedido]
+    // Atributos Estáticos - Compartilhados por toda a classe Pedido
     public static double TaxaEntregaBase = 5.00;
     private static int totalPedidosRealizados = 0;
     private static double faturamentoTotal = 0.0;
@@ -15,11 +15,11 @@ public class Pedido
 
     private readonly int numeroPedido;
 
-    // [REQUISITO: Associação Simples - Pedido possui referência direta a Cliente e Entregador]
+    //  Associação Simples - Pedido possui referência direta a Cliente e Entregador
     private readonly Cliente cliente;
     private Entregador? entregador;
 
-    // [REQUISITO: Composição - Pedido é composto por ItemPedido, instanciados internamente]
+    // Composição - Pedido é composto por ItemPedido, instanciados internamente
     private readonly List<ItemPedido> itens;
 
     private double distanciaKm;
@@ -102,7 +102,7 @@ public class Pedido
         return maiorTempo;
     }
 
-    // [REQUISITO: Dependência e Polimorfismo 2 - Recebe IMetodoPagamento apenas na execução do método]
+    // Dependência e Polimorfismo 2 - Recebe IMetodoPagamento apenas na execução do método
     public double FinalizarPedido(IMetodoPagamento pagamento)
     {
         if (finalizado)

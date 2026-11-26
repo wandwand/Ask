@@ -2,7 +2,7 @@ using SistemaDelivery.Cardapios;
 
 namespace SistemaDelivery.Pedidos;
 
-// [REQUISITO: Dependência - Recebe Pedido como parâmetro apenas durante a execução de ImprimirRecibo]
+//  Dependência - Recebe Pedido como parâmetro apenas durante a execução de ImprimirRecibo
 public class GeradorRecibo
 {
     public void ImprimirRecibo(Pedido pedido)
@@ -60,7 +60,7 @@ public class GeradorRecibo
         foreach (var itemPedido in pedido.Itens)
         {
             ItemCardapio item = itemPedido.Item;
-            // [REQUISITO: Polimorfismo 3 - Chamada via referência da interface IPreparavel]
+            //  Polimorfismo 3 - Chamada via referência da interface IPreparavel
             if (item is IPreparavel preparavel)
             {
                 Console.WriteLine($"  [{itemPedido.Quantidade}x] {preparavel.GerarInstrucoesCozinha()}");

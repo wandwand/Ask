@@ -1,9 +1,9 @@
 namespace SistemaDelivery.Cardapios;
 
-// [REQUISITO: Classe Abstrata - Base para os produtos do cardápio]
+// Classe Abstrata - Base para os produtos do cardápio
 public abstract class ItemCardapio
 {
-    // [REQUISITO: Modificador protected - Acessível diretamente pelas subclasses]
+    // Modificador protected - Acessível diretamente pelas subclasses
     protected string codigo;
     protected string nome;
     protected double precoBase;
@@ -22,7 +22,7 @@ public abstract class ItemCardapio
     public abstract int CalcularTempoPreparo();
     public abstract string ExibirDetalhes();
 
-    // [REQUISITO: Modificador public - Propriedades para acesso controlado]
+    // Modificador public - Propriedades para acesso controlado
     public string Codigo
     {
         get => codigo;

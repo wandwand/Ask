@@ -1,6 +1,6 @@
 namespace SistemaDelivery.Pagamentos;
 
-// [REQUISITO: Implementação de Interface 2 - Pagamento via Cartão com taxa de maquininha/parcelamento]
+// Implementação de Interface 2 - Pagamento via Cartão com taxa de maquininha/parcelamento
 public class PagamentoCartao : IMetodoPagamento
 {
     private const double TaxaBaseMaquininha = 0.03;

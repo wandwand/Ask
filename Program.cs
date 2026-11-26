@@ -31,7 +31,7 @@ public class Program
             switch (opcao)
             {
                 case 1:
-                    // [REQUISITO: Polimorfismo 1 e 3]
+                    //  Polimorfismo 1 e 3
                     Service.ListarCardapioPolimorfico();
                     break;
                 case 2:
@@ -67,11 +67,11 @@ public class Program
         {
             Console.WriteLine(" [Nenhum pedido aberto no momento]");
         }
-        Console.WriteLine("1. Listar Cardápio Completo (Polimorfismo)");
+        Console.WriteLine("1. Listar Cardápio Completo");
         Console.WriteLine("2. Criar Novo Pedido e Adicionar Itens");
-        Console.WriteLine("3. Atribuir Entregador e Calcular Frete (Estático)");
+        Console.WriteLine("3. Atribuir Entregador e Calcular Frete");
         Console.WriteLine("4. Finalizar Pedido (Pagamento Pix/Cartão + Recibo)");
-        Console.WriteLine("5. Exibir Estatísticas Gerais (Membros Estáticos)");
+        Console.WriteLine("5. Resumo dos pedidos e faturamento");
         Console.WriteLine("0. Sair");
         Console.WriteLine("================================================");
     }
@@ -203,7 +203,7 @@ public class Program
         Console.WriteLine("2. Cartão de Crédito (taxa de maquininha / parcelamento)");
         int escolha = LerInteiro("Opção de pagamento: ");
 
-        // [REQUISITO: Polimorfismo 2 - Variável da interface IMetodoPagamento recebe implementações concretas]
+        // Polimorfismo 2 - Variável da interface IMetodoPagamento recebe implementações concretas
         IMetodoPagamento pagamento;
         if (escolha == 1)
         {
@@ -234,7 +234,7 @@ public class Program
         }
 
         pedidoAtual.FinalizarPedido(pagamento);
-        // [REQUISITO: Dependência - GeradorRecibo recebe pedido apenas durante a execução do método]
+        // Dependência - GeradorRecibo recebe pedido apenas durante a execução do método
         GeradorRecibo.ImprimirRecibo(pedidoAtual);
 
         // Libera o entregador após concluir a simulação de entrega

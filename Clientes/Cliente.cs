@@ -1,6 +1,6 @@
 namespace SistemaDelivery.Clientes;
 
-// [REQUISITO: Associação Simples (Parte 1) - Entidade Cliente referenciada por Pedido]
+// Associação Simples - Entidade Cliente referenciada por Pedido
 public class Cliente
 {
     private readonly int id;

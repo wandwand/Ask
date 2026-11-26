@@ -1,6 +1,6 @@
 namespace SistemaDelivery.Cardapios;
 
-// [REQUISITO: Agregação - Cardapio agrega ItemCardapio criados externamente; se Cardapio sumir, os itens continuam existindo]
+// Agregação - Cardapio agrega ItemCardapio criados externamente; se Cardapio sumir, os itens continuam existindo
 public class Cardapio
 {
     private readonly string nomeRestaurante;

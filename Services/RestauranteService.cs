@@ -63,11 +63,11 @@ public class RestauranteService
         Console.WriteLine($"\n================ CARDÁPIO: {cardapio.NomeRestaurante.ToUpperInvariant()} ================");
         IReadOnlyList<ItemCardapio> itens = cardapio.Itens;
 
-        // [REQUISITO: Polimorfismo 1 e 3 - Iteração sobre IReadOnlyList<ItemCardapio> chamando métodos polimórficos]
+        //  Polimorfismo 1 e 3 - Iteração sobre IReadOnlyList<ItemCardapio> chamando métodos polimórficos
         foreach (ItemCardapio item in itens)
         {
             Console.WriteLine(item.ExibirDetalhes());
-            Console.WriteLine($"   -> Cálculo Polimórfico: Preço Final = R$ {item.CalcularPrecoFinal():F2} | Tempo de Preparo = {item.CalcularTempoPreparo()} min");
+            Console.WriteLine($"   ->  Preço Final = R$ {item.CalcularPrecoFinal():F2} | Tempo de Preparo = {item.CalcularTempoPreparo()} min");
 
             if (item is IPreparavel preparavel)
             {

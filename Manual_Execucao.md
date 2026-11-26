@@ -1,6 +1,6 @@
 # Manual de Execução — Sistema de Pedidos de Restaurante / Delivery
 
-Aplicação console desenvolvida em **C# (.NET 10)** para gerenciamento de pedidos de restaurante e delivery, demonstrando os pilares de Programação Orientada a Objetos (POO).
+Aplicação de POO com base no projeto final da disciplina de programação orientada a objetos, foi desenvolvida em **C# (.NET 10)** para gerenciamento de pedidos de restaurante e delivery, com a intenção de criar uma aplciação com os requisitos 2) do trabalho final.
 
 ---
 
@@ -19,6 +19,7 @@ dotnet --version
 
 ## 2. Como Compilar e Executar
 
+## Opção 1
 1. Abra o terminal na pasta raiz do projeto (onde está o arquivo `SistemaDelivery.csproj`):
 
    ```powershell
@@ -36,7 +37,8 @@ dotnet --version
    ```powershell
    dotnet run
    ```
-
+## Opção 2
+Clique no projeto  `SistemaDelivery.csproj`— Projeto de c#.
 ---
 
 ## 3. Como Utilizar o Sistema (Passo a Passo)
@@ -65,6 +67,7 @@ Ao iniciar, o sistema carrega automaticamente um cardápio, clientes e entregado
 
 ## 4. Estrutura do Projeto
 
+- `SistemaDelivery.csproj`— Projeto de c#.
 - `Program.cs` — Ponto de entrada e menu interativo no console.
 - `Cardapios/` — `ItemCardapio`, `Lanche`, `Bebida`, `Sobremesa`, `Cardapio`, `IPreparavel`.
 - `Pedidos/` — `Pedido`, `ItemPedido`, `GeradorRecibo`.
